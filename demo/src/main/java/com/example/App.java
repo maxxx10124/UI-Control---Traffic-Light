@@ -21,46 +21,44 @@ public class App extends Application {
     double x = circle.getRadius(), y = circle.getRadius();
 @Override
     public void start(Stage primaryStage) {
-        primaryStage.setTitle("Loan Calculator");
-// Create UI elements
-        TextField loanAmountField = new TextField();
-        TextField interestRateField = new TextField();
-        TextField loanTermField = new TextField();
-        Button calculateButton = new Button("Calculate");
-        Label resultLabel = new Label();
-        Label totalPayment = new Label();
- // Layout using VBox
+        primaryStage.setTitle("Loan Calculato with Bouncing Ball Animation");
+        //Calculator
+        TextField loanAmountTf = new TextField();
+        TextField interestRateTf = new TextField();
+        TextField loanTermTf = new TextField();
+        Button calculateBt = new Button("Calculate");
+        Label resultLb = new Label();
+        Label totalPaymentLb = new Label();
         GridPane layout = new GridPane();
         layout.setAlignment(Pos.CENTER);
         layout.setPadding(new Insets(11.5, 12.5, 13.5, 14.5));
         layout.setHgap(5.5);
         layout.setVgap(5.5);
         layout.add(new Label("Loan Amount:"), 0,0);
-        layout.add(loanAmountField,1,0);
+        layout.add(loanAmountTf,1,0);
         layout.add(new Label("Interest Rate:"), 0, 1);
-        layout.add(interestRateField,1,1);
+        layout.add(interestRateTf,1,1);
         layout.add(new Label("Loan Term:"), 0, 2);
-        layout.add(loanTermField, 1, 2);
+        layout.add(loanTermTf, 1, 2);
         layout.add(new Label("Monthly Payment:"), 0, 4);
-        layout.add(resultLabel, 1,4);
+        layout.add(resultLb, 1,4);
         layout.add(new Label("Total Payment:"), 0, 5);
-        layout.add(totalPayment, 1, 5);
+        layout.add(totalPaymentLb, 1, 5);
         layout.setAlignment(Pos.CENTER);
-        layout.add(calculateButton, 1, 3);
-        calculateButton.setOnAction(e -> {
-// Calculation Logic
-            double loanAmount = Double.parseDouble(loanAmountField.getText());
-            double interestRate = Double.parseDouble(interestRateField.getText()) / 100 / 12;
-            int loanTerm = Integer.parseInt(loanTermField.getText()) *12;
+        layout.add(calculateBt, 1, 3);
+        calculateBt.setOnAction(e -> {
+            double loanAmount = Double.parseDouble(loanAmountTf.getText());
+            double interestRate = Double.parseDouble(interestRateTf.getText()) / 100 / 12;
+            int loanTerm = Integer.parseInt(loanTermTf.getText()) *12;
             double monthlyPayment = (loanAmount * interestRate) / (1 - Math.pow(1 + interestRate, -loanTerm));
             double total  = monthlyPayment * loanTerm;
-            resultLabel.setText(String.format("%.2f",monthlyPayment));
-            totalPayment.setText(String.format("%.2f", total));
+            resultLb.setText(String.format("%.2f",monthlyPayment));
+            totalPaymentLb.setText(String.format("%.2f", total));
         });
 
 
 
-// Animation        
+//Ball Animation        
         Pane pane = new Pane();
         
         circle.setFill(Color.RED);
@@ -71,8 +69,8 @@ public class App extends Application {
         pane.getChildren().add(circle);
         pane.setPrefWidth(400);
         pane.setBorder(new Border(new BorderStroke(Color. BLACK,BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
-        circle.setCenterX(15);
-        circle.setCenterY(15);
+        circle.setCenterX(x);
+        circle.setCenterY(y);
         BorderPane bp = new BorderPane();
         bp.setLeft(layout);
         bp.setRight(pane);
