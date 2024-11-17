@@ -1,23 +1,19 @@
 package com.example;
 // Main class for the Loan Calculator
 import javafx.application.Application;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
-
-
-import javafx.animation.*;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.paint.Color;
-import javafx.util.Duration;
 
 public class App extends Application {
 @Override
     public void start(Stage primaryStage) {
+
+      //Adding radio buttons in the same toggle group to a HBox
       RadioButton rbRed = new RadioButton("Red");
       RadioButton rbYellow = new RadioButton("Yellow");
       RadioButton rbGreen = new RadioButton("Green");
@@ -28,6 +24,7 @@ public class App extends Application {
       rbGreen.setToggleGroup(group);
       buttons.getChildren().addAll(rbRed, rbYellow, rbGreen);
 
+      //Using circle and Triangle to draw the shape of traffic light
       Pane pane = new Pane();
       Rectangle border = new Rectangle(70, 10, 60, 166);
       border.setFill(Color.BLACK);
@@ -46,6 +43,8 @@ public class App extends Application {
       Circle greenLight = new Circle(100, 142, 20);
       greenLight.setFill(Color.WHITE);
       pane.getChildren().addAll(border,frame, redLightBorder, redLight, yellowLightBorder, yellowLight, greenLightBorder, greenLight);
+
+      //set the color of the corresponding light when each button is pressed
       rbRed.setOnAction(e -> {
         if (rbRed.isSelected()) {
           redLight.setFill(Color.RED);
@@ -67,13 +66,7 @@ public class App extends Application {
           greenLight.setFill(Color.GREEN);
         }
       });
-    
   
-
-
-
-
-
 
       primaryStage.setTitle("Trafic Light");
       BorderPane bp = new BorderPane();
